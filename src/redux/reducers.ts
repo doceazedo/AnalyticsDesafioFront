@@ -57,7 +57,7 @@ const gameSlice = createSlice({
 
       state.score += score;
       if (state.score < 0) state.score = 0;
-      state.lastRoundPicks.push({
+      state.lastRoundPicks.unshift({
         pick: pickedColor,
         answer: correctColor,
         score,
