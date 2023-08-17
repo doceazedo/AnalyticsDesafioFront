@@ -18,8 +18,14 @@ import { useEffect } from "react";
 
 export const Game = () => {
   const dispatch = useDispatch();
-  const { currentColor, colorOptions, score, started, timeRemaining } =
-    useSelector((state: GameState) => state.game);
+  const {
+    currentColor,
+    colorOptions,
+    score,
+    highScore,
+    started,
+    timeRemaining,
+  } = useSelector((state: GameState) => state.game);
 
   useEffect(() => {
     if (!started) return;
@@ -27,7 +33,14 @@ export const Game = () => {
       const interval = setInterval(() => dispatch(decrementTime()), 1000);
       return () => clearInterval(interval);
     }
-    dispatch(failRound());
+
+    // Ignoring this for now as it takes away 2 points
+    // AND the game ends. This feels very weird as the
+    // player sees they have, let's say, 5 points, and
+    // the game ends with them having only 3.
+    //
+    // dispatch(failRound());
+
     dispatch(resetGame());
   }, [started, timeRemaining, dispatch]);
 
@@ -48,6 +61,7 @@ export const Game = () => {
         started={started}
         timeRemaining={timeRemaining}
         score={score}
+        highScore={highScore}
         handleReset={handleReset}
       />
       <Progress

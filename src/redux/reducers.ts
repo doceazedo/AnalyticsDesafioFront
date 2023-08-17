@@ -7,8 +7,11 @@ const initialState = {
   currentColor: "#2fb344",
   colorOptions: ["#000000", "#000000", "#000000"],
   score: 0,
+  highScore: parseInt(localStorage.getItem("HIGHSCORE") || "0"),
   timeRemaining: roundDuration,
-  lastRoundPicks: [] as string[],
+  lastRoundPicks: JSON.parse(
+    localStorage.getItem("HISTORY") || "[]"
+  ) as string[],
 };
 
 const gameSlice = createSlice({
@@ -44,13 +47,21 @@ const gameSlice = createSlice({
       state.score -= 2;
       if (state.score < 0) state.score = 0;
     },
-    resetGame: (state) => ({
-      ...initialState,
-      // Keep useful last round data that will be
-      // overwritten when a new game starts anyways
-      currentColor: state.currentColor,
-      lastRoundPicks: state.lastRoundPicks,
-    }),
+    resetGame: (state) => {
+      const highScore =
+        state.score > state.highScore ? state.score : state.highScore;
+      localStorage.setItem("HIGHSCORE", highScore.toString());
+
+      return {
+        ...initialState,
+        // Keep useful last round data that will be
+        // overwritten when a new game starts anyways
+        currentColor: state.currentColor,
+        lastRoundPicks: state.lastRoundPicks,
+        score: state.score,
+        highScore,
+      };
+    },
   },
 });
 

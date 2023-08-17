@@ -4,6 +4,7 @@ type GameDataProps = {
   started: boolean;
   timeRemaining: number;
   score: number;
+  highScore: number;
   handleReset: () => void;
 };
 
@@ -18,7 +19,7 @@ export const GameData = (props: GameDataProps) => (
     </RestartButton>
     <Scores>
       <Score>
-        <span>High score</span> ??
+        <span>High score</span> {props.highScore}
       </Score>
       <Score>
         <span>Score</span> {props.score}
