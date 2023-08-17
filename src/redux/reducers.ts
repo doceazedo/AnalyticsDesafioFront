@@ -20,7 +20,7 @@ export type State = {
   game: GameState;
 };
 
-export const roundDuration = 20;
+export const roundDuration = 30;
 
 const initialState: GameState = {
   started: false,
