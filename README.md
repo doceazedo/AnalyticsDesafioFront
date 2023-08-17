@@ -1,6 +1,6 @@
 # Guess the Color 🎨
 
-Desafio Frontend Analytics — advinhe o código HEX das cores!
+Desafio Frontend Analytics — advinhe o código HEX das cores! [Disponível aqui.](https://desafio-softexpert.doceazedo.com)
 
 ![](screenshot.jpg)
 
@@ -23,6 +23,13 @@ A cada rodada, uma nova cor aparece, e a pessoa terá ~~10s~~ para responder e r
   - [x] Pilha referente a última partida concluída persiste
 - [x] Se a pessoa quiser, ela pode reiniciar a partida a qualquer momento
 - [x] Se a pessoa quiser, ela pode limpar todos os dados salvos
+
+### Experiência do usuário
+
+- [x] Textos com fundo colorido têm contraste agradável, o texto tem uma cor escura ou clara defininda automaticamente a depender do fundo
+- [x] O painel lateral funciona como uma pilha, ou seja, a cada rodada as respostas mais recentes aparecem no topo
+- [x] O painel lateral cresce verticalmente e infinitamente, e o scroll existe apenas nele
+- [x] Há animações simples
 
 ## Observações
 
