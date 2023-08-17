@@ -91,6 +91,10 @@ const GameWrapper = styled.main`
   align-items: center;
   gap: 1.5rem;
   width: 100%;
+
+  @media screen and (max-width: 768px) {
+    height: 100vh;
+  }
 `;
 
 const Title = styled.h1`

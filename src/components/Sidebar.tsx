@@ -49,6 +49,12 @@ const SidebarWrapper = styled.aside`
   width: 24rem;
   background-color: #fff;
   border-right: 1px solid #dadfe5;
+
+  @media screen and (max-width: 768px) {
+    width: 100%;
+    border-right: none;
+    border-top: 1px solid #dadfe5;
+  }
 `;
 
 const Title = styled.h1`

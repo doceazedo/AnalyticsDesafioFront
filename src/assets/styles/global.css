@@ -21,3 +21,16 @@ button {
 #root {
   display: flex;
 }
+
+@media screen and (max-width: 768px) {
+  html,
+  body,
+  #root {
+    width: unset;
+    height: unset;
+  }
+
+  #root {
+    flex-direction: column-reverse;
+  }
+}
