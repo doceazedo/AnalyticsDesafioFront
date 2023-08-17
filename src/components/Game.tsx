@@ -6,8 +6,7 @@ import {
   pickColor,
   decrementTime,
   resetGame,
-  GameState,
-  failRound,
+  State,
   roundDuration,
 } from "../redux/reducers";
 import { GameData } from "./GameData";
@@ -25,7 +24,7 @@ export const Game = () => {
     highScore,
     started,
     timeRemaining,
-  } = useSelector((state: GameState) => state.game);
+  } = useSelector((state: State) => state.game);
 
   useEffect(() => {
     if (!started) return;

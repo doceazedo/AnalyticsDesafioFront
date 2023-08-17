@@ -1,16 +1,18 @@
 import styled from "@emotion/styled";
 import { useSelector } from "react-redux";
-import { GameState } from "../redux/reducers";
+import { State } from "../redux/reducers";
 
 export const Sidebar = () => {
-  const { lastRoundPicks } = useSelector((state: GameState) => state.game);
+  const { lastRoundPicks } = useSelector((state: State) => state.game);
 
   return (
     <SidebarWrapper>
       <Title>Current/Latest game</Title>
       <ul>
-        {lastRoundPicks.map((color, i) => (
-          <li key={i}>{color}</li>
+        {lastRoundPicks.map((round, i) => (
+          <li key={i}>
+            <pre>{JSON.stringify(round, null, 2)}</pre>
+          </li>
         ))}
       </ul>
     </SidebarWrapper>

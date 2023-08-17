@@ -1,17 +1,33 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 
+export type GameState = {
+  started: boolean;
+  currentColor: string;
+  colorOptions: string[];
+  score: number;
+  highScore: number;
+  timeRemaining: number;
+  lastRoundPicks: {
+    pick: string;
+    answer: string;
+    score: number;
+  }[];
+};
+
+export type State = {
+  game: GameState;
+};
+
 export const roundDuration = 10;
 
-const initialState = {
+const initialState: GameState = {
   started: false,
   currentColor: "#2fb344",
   colorOptions: ["#000000", "#000000", "#000000"],
   score: 0,
   highScore: parseInt(localStorage.getItem("HIGHSCORE") || "0"),
   timeRemaining: roundDuration,
-  lastRoundPicks: JSON.parse(
-    localStorage.getItem("HISTORY") || "[]"
-  ) as string[],
+  lastRoundPicks: JSON.parse(localStorage.getItem("HISTORY") || "[]"),
 };
 
 const gameSlice = createSlice({
@@ -35,10 +51,15 @@ const gameSlice = createSlice({
       const correctColor = state.currentColor;
       const pickedColor = action.payload;
       const isCorrect = correctColor == pickedColor;
+      const score = isCorrect ? 5 : -1;
 
-      state.score += isCorrect ? 1 : -1;
+      state.score += score;
       if (state.score < 0) state.score = 0;
-      state.lastRoundPicks.push(pickedColor);
+      state.lastRoundPicks.push({
+        pick: pickedColor,
+        answer: correctColor,
+        score,
+      });
     },
     decrementTime: (state) => {
       if (state.timeRemaining > 0) state.timeRemaining -= 1;
@@ -51,6 +72,7 @@ const gameSlice = createSlice({
       const highScore =
         state.score > state.highScore ? state.score : state.highScore;
       localStorage.setItem("HIGHSCORE", highScore.toString());
+      localStorage.setItem("HISTORY", JSON.stringify(state.lastRoundPicks));
 
       return {
         ...initialState,
@@ -87,10 +109,6 @@ const shuffle = <T>(array: T[]): T[] => {
     ];
   }
   return array;
-};
-
-export type GameState = {
-  game: typeof initialState;
 };
 
 export const {
