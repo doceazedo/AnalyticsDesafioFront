@@ -20,7 +20,7 @@ export type State = {
   game: GameState;
 };
 
-export const roundDuration = 30;
+export const gameDuration = 30;
 
 const initialState: GameState = {
   started: false,
@@ -28,7 +28,7 @@ const initialState: GameState = {
   colorOptions: ["#000000", "#000000", "#000000"],
   score: 0,
   highScore: parseInt(localStorage.getItem("HIGHSCORE") || "0"),
-  timeRemaining: roundDuration,
+  timeRemaining: gameDuration,
   lastRoundPicks: JSON.parse(localStorage.getItem("HISTORY") || "[]"),
 };
 
@@ -39,6 +39,7 @@ const gameSlice = createSlice({
     startGame: (state) => {
       state.started = true;
       state.lastRoundPicks = [];
+      state.timeRemaining = gameDuration;
     },
     startNewRound: (state) => {
       state.currentColor = getRandomColor();
@@ -47,7 +48,6 @@ const gameSlice = createSlice({
         getRandomColor(),
         getRandomColor(),
       ]);
-      state.timeRemaining = roundDuration;
     },
     pickColor: (state, action: PayloadAction<string>) => {
       const correctColor = state.currentColor;
@@ -73,6 +73,8 @@ const gameSlice = createSlice({
     resetGame: (state) => {
       const highScore =
         state.score > state.highScore ? state.score : state.highScore;
+      localStorage.setItem("HIGHSCORE", highScore.toString());
+      localStorage.setItem("HISTORY", JSON.stringify(state.lastRoundPicks));
 
       return {
         ...initialState,
