@@ -1,6 +1,7 @@
 import styled from "@emotion/styled";
 
 type GameDataProps = {
+  started: boolean;
   timeRemaining: number;
   score: number;
   handleReset: () => void;
@@ -12,7 +13,9 @@ export const GameData = (props: GameDataProps) => (
       <span>Time left</span>
       {props.timeRemaining}
     </Card>
-    <RestartButton onClick={props.handleReset}>Restart</RestartButton>
+    <RestartButton onClick={props.handleReset} disabled={!props.started}>
+      Restart
+    </RestartButton>
     <Scores>
       <Score>
         <span>High score</span> ??
@@ -59,6 +62,11 @@ const RestartButton = styled.button`
   border: none;
   background: none;
   cursor: pointer;
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
 `;
 
 const Scores = styled.div`

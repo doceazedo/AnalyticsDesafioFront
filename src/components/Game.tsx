@@ -44,6 +44,7 @@ export const Game = () => {
     <GameWrapper>
       <Title>Guess the Color</Title>
       <GameData
+        started={started}
         timeRemaining={timeRemaining}
         score={score}
         handleReset={handleReset}
