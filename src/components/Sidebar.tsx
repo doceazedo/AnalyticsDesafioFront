@@ -3,6 +3,7 @@ import { useSelector } from "react-redux";
 import { State } from "../redux/reducers";
 import { CheckCircle2, XCircle } from "lucide-react";
 import { getTextColor } from "../utils/get-text-color";
+import { motion } from "framer-motion";
 
 export const Sidebar = () => {
   const { lastRoundPicks, started } = useSelector((state: State) => state.game);
@@ -17,8 +18,12 @@ export const Sidebar = () => {
           <span>Score</span>
         </HistoryHeader>
         <Answers>
-          {lastRoundPicks.map((round, i) => (
-            <Answer key={i}>
+          {lastRoundPicks.map((round) => (
+            <Answer
+              key={`${round.pick}${round.answer}`}
+              initial={{ opacity: 0, x: -64 }}
+              animate={{ opacity: 1, x: 0 }}
+            >
               <Colors>
                 <Color color={round.pick}>{round.pick}</Color>
                 {round.pick != round.answer && (
@@ -92,7 +97,7 @@ const Answers = styled.ul`
   width: 100%;
 `;
 
-const Answer = styled.li`
+const Answer = styled(motion.li)`
   display: flex;
   gap: 0.75rem;
   width: 100%;
