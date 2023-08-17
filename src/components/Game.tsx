@@ -7,7 +7,7 @@ import {
   decrementTime,
   resetGame,
   State,
-  roundDuration,
+  gameDuration,
   resetData,
 } from "../redux/reducers";
 import { GameData } from "./GameData";
@@ -67,7 +67,11 @@ export const Game = () => {
       />
       <Progress
         color={currentColor}
-        progress={started ? (timeRemaining / roundDuration) * 100 - 10 : 100}
+        progress={
+          started
+            ? (timeRemaining / gameDuration) * 100 - 100 / gameDuration
+            : 100
+        }
       />
       <ColorPreview
         color={currentColor}
