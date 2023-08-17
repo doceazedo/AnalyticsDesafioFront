@@ -15,9 +15,10 @@ export const Progress = styled.div<ProgressProps>`
   &::before {
     content: "";
     display: flex;
-    width: ${(props) => props.progress || 100}%;
+    width: ${(props) => props.progress}%;
     height: 100%;
     background-color: ${(props) => props.color};
     border-radius: 1rem;
+    transition: width 1s linear;
   }
 `;
