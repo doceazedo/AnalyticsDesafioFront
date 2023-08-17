@@ -1,4 +1,6 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
+import { getRandomColor } from "../utils/get-random-color";
+import { shuffle } from "../utils/shuffle";
 
 export type GameState = {
   started: boolean;
@@ -89,30 +91,6 @@ const gameSlice = createSlice({
     },
   },
 });
-
-// Source: https://css-tricks.com/snippets/javascript/random-hex-color/#comment-83815
-const getRandomColor = () => {
-  const x = Math.round(0xffffff * Math.random()).toString(16);
-  const y = 6 - x.length;
-  const z = "000000";
-  const z1 = z.substring(0, y);
-  return "#" + z1 + x;
-};
-
-// Source: https://stackoverflow.com/a/2450976/10514863
-const shuffle = <T>(array: T[]): T[] => {
-  let currentIndex = array.length;
-  let randomIndex: number;
-  while (currentIndex != 0) {
-    randomIndex = Math.floor(Math.random() * currentIndex);
-    currentIndex--;
-    [array[currentIndex], array[randomIndex]] = [
-      array[randomIndex],
-      array[currentIndex],
-    ];
-  }
-  return array;
-};
 
 export const {
   startGame,
