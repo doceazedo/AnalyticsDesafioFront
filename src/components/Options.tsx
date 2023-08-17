@@ -24,7 +24,7 @@ const OptionsWrapper = styled.div`
 const Option = styled.button`
   width: 100%;
   background-color: #fff;
-  border: 1px solid ${(props) => props.color}; // FIXME: Debug, remove me later!!
+  border: 1px solid #dadfe5;
   border-radius: 0.375rem;
   padding: 0.75rem 1rem;
   cursor: pointer;
