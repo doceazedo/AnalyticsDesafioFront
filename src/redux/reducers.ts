@@ -17,17 +17,17 @@ const gameSlice = createSlice({
   reducers: {
     startGame: (state) => {
       state.started = true;
+      state.lastRoundPicks = [];
     },
-    startNewRound: (state) => ({
-      ...state,
-      currentColor: getRandomColor(),
-      colorOptions: shuffle([
+    startNewRound: (state) => {
+      state.currentColor = getRandomColor();
+      state.colorOptions = shuffle([
         state.currentColor,
         getRandomColor(),
         getRandomColor(),
-      ]),
-      timeRemaining: roundDuration,
-    }),
+      ]);
+      state.timeRemaining = roundDuration;
+    },
     pickColor: (state, action: PayloadAction<string>) => {
       const correctColor = state.currentColor;
       const pickedColor = action.payload;
@@ -44,7 +44,13 @@ const gameSlice = createSlice({
       state.score -= 2;
       if (state.score < 0) state.score = 0;
     },
-    resetGame: () => initialState,
+    resetGame: (state) => ({
+      ...initialState,
+      // Keep useful last round data that will be
+      // overwritten when a new game starts anyways
+      currentColor: state.currentColor,
+      lastRoundPicks: state.lastRoundPicks,
+    }),
   },
 });
 

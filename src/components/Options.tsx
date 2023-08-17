@@ -8,7 +8,7 @@ type OptionsProps = {
 export const Options = (props: OptionsProps) => (
   <OptionsWrapper>
     {props.options.map((color, i) => (
-      <Option key={i} onClick={() => props.handlePick(color)}>
+      <Option key={i} onClick={() => props.handlePick(color)} color={color}>
         {color}
       </Option>
     ))}
@@ -24,7 +24,7 @@ const OptionsWrapper = styled.div`
 const Option = styled.button`
   width: 100%;
   background-color: #fff;
-  border: 1px solid #dadfe5;
+  border: 1px solid ${(props) => props.color}; // FIXME: Debug, remove me later!!
   border-radius: 0.375rem;
   padding: 0.75rem 1rem;
   cursor: pointer;
