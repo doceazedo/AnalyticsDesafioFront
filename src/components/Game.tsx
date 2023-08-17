@@ -8,6 +8,7 @@ import {
   resetGame,
   State,
   roundDuration,
+  resetData,
 } from "../redux/reducers";
 import { GameData } from "./GameData";
 import { Options } from "./Options";
@@ -51,7 +52,8 @@ export const Game = () => {
     dispatch(pickColor(pickedColor));
     dispatch(startNewRound());
   };
-  const handleReset = () => dispatch(resetGame());
+  const handleResetGame = () => dispatch(resetGame());
+  const handleResetData = () => dispatch(resetData());
 
   return (
     <GameWrapper>
@@ -61,7 +63,7 @@ export const Game = () => {
         timeRemaining={timeRemaining}
         score={score}
         highScore={highScore}
-        handleReset={handleReset}
+        handleResetGame={handleResetGame}
       />
       <Progress
         color={currentColor}
@@ -75,7 +77,9 @@ export const Game = () => {
       {started && (
         <Options options={colorOptions} handlePick={handleColorPick} />
       )}
-      <ResetDataButton>Reset all data</ResetDataButton>
+      <ResetDataButton onClick={handleResetData}>
+        Reset all data
+      </ResetDataButton>
     </GameWrapper>
   );
 };

@@ -71,8 +71,6 @@ const gameSlice = createSlice({
     resetGame: (state) => {
       const highScore =
         state.score > state.highScore ? state.score : state.highScore;
-      localStorage.setItem("HIGHSCORE", highScore.toString());
-      localStorage.setItem("HISTORY", JSON.stringify(state.lastRoundPicks));
 
       return {
         ...initialState,
@@ -83,6 +81,11 @@ const gameSlice = createSlice({
         score: state.score,
         highScore,
       };
+    },
+    resetData: () => {
+      localStorage.removeItem("HIGHSCORE");
+      localStorage.removeItem("HISTORY");
+      return initialState;
     },
   },
 });
@@ -118,6 +121,7 @@ export const {
   decrementTime,
   failRound,
   resetGame,
+  resetData,
 } = gameSlice.actions;
 
 export default gameSlice.reducer;

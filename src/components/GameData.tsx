@@ -5,7 +5,7 @@ type GameDataProps = {
   timeRemaining: number;
   score: number;
   highScore: number;
-  handleReset: () => void;
+  handleResetGame: () => void;
 };
 
 export const GameData = (props: GameDataProps) => (
@@ -14,7 +14,7 @@ export const GameData = (props: GameDataProps) => (
       <span>Time left</span>
       {props.timeRemaining}
     </Card>
-    <RestartButton onClick={props.handleReset} disabled={!props.started}>
+    <RestartButton onClick={props.handleResetGame} disabled={!props.started}>
       Restart
     </RestartButton>
     <Scores>
