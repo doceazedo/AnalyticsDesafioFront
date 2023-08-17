@@ -22,6 +22,7 @@ const ColorPreviewWrapper = styled.div`
   height: 20rem;
   background-color: ${(props) => props.color};
   border-radius: 1rem;
+  transition: all 0.2s ease;
 `;
 
 const PlayButton = styled.button`

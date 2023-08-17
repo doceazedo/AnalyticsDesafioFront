@@ -19,6 +19,6 @@ export const Progress = styled.div<ProgressProps>`
     height: 100%;
     background-color: ${(props) => props.color};
     border-radius: 1rem;
-    transition: width 1s linear;
+    transition: width 1s linear, background-color 0.2s ease;
   }
 `;
